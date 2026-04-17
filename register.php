@@ -45,12 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password === '') {
         $errors[] = "Password is required.";
     }
-   
-
-    // Enforce a minimum password length
-    if (strlen($password) < 8) {
-        $errors[] = "Password must be at least 8 characters long.";
-    }
 
     // --------------------------------------------------
     // Check if the username or email already exists
@@ -104,8 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the insert query
         $stmt->execute();
 
-        // Set a success message
-        $success = "Account created successfully. You can now log in.";
+        header("Location: index.php");
+        exit();
     }
 }
 ?>
@@ -114,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     <h2>Register for an account here:</h2>
-    <form>
+    <form method="post">
 
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
